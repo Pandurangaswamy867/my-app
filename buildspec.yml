@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14  # Specify the Node.js version
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+  build:
+    commands:
+      - echo "Building the application..."
+      # No specific build step as this is a simple Node.js app
+  post_build:
+    commands:
+      - echo "Packaging the application for deployment..."
+      - zip -r app.zip .  # Package all files into a zip for Elastic Beanstalk
+artifacts:
+  files:
+    - app.zip  # This is the packaged application zip file
+    - cron.yaml  # Include the cron.yaml file for worker environment
+    - logging.config  # Include the logging configuration file
